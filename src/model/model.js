@@ -9,11 +9,37 @@ qLog.Task = Backbone.Model.extend({
 		'read':   'get'
 	},
 	
-	initialize: function(){
+	initialize: function(attrs){
+		var log = attrs.log, u, l;
+		if (log){
+			l = log.slice(0, -1);
+			u = log.slice(-1);
+			l = new Number(l);
+			this.set('value', l);
+			this.set('unit', u);
+			this.unset('log');
+		}
 	},
 	
 	validate: function(attrs, options){
-		var tm = attrs.time;
+		var v = attrs.value, u = attrs.unit, t = attrs.task, d = attrs.date;
+		var msg = [];
+		if (t === 'undefined'){
+			msg.push("Task description is mandatory");
+		}
+		if (d === 'undefined'){
+			msg.push("Date is mandatory");
+		}
+		if (v === 'undefined' || u === 'undefined'){
+			msg.push("Time is mandatory");
+		}
+		if (Number.isNaN(v)){
+			msg.push('Invalid time spend value provided. Use the syntax like 1.5d, 1.5h, 30m');
+		}
+		if (v <=0 ){
+			msg.push('Time spend must be a positive number');
+		}
+		return msg;
 	},
 
 	sync: function(method, model, options){
@@ -25,8 +51,43 @@ qLog.Task = Backbone.Model.extend({
 		if (m == 'remove'){
 			obj = obj.timestamp;
 		}
-		qLog.ds.sync(m, obj, function(result){
+		
+		//Possibility of mocking datastore to test sync function.
+		var ds = options.ds || qLog.ds;
+		ds.sync(m, obj, function(result){
 		}, this);
+	},
+	
+	toHour: function(){
+		var h, log = this.get('value'), unit = this.get('unit');
+		switch (unit){
+			case 'd':
+				h = log * 8;
+				break;
+			case 'h':
+				h = log;
+				break;
+			case 'm':
+				h = log / 60;
+				break;
+		}
+		return h.toPrecision(3);
+	},
+	
+	getLogString: function(){
+		var str, log = this.get('log'), unit = this.get('unit');
+		switch (unit){
+			case 'd':
+				str = 'days';
+				break;
+			case 'h':
+				str = 'hours';
+				break;
+			case 'm':
+				str = 'mins';
+				break;
+		}
+		return log + " " + str;
 	}
 
 });
@@ -46,6 +107,14 @@ qLog.TaskCollection = Backbone.Collection.extend({
 			return refDate.compareTo(date) == 0;
 		});
 		return result;
+	},
 	
+	sum: function(items){
+		var sum = 0;
+		_.each(items, function(item){
+			sum += item.toHour();
+		});
+		return sum;
 	}
+	
 });
