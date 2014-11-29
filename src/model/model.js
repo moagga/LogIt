@@ -1,3 +1,4 @@
+var qLog = qLog || {};
 qLog.Task = Backbone.Model.extend({
 
 	idAttribute : 'timestamp',
@@ -10,10 +11,17 @@ qLog.Task = Backbone.Model.extend({
 	},
 	
 	initialize: function(attrs){
-		var log = attrs.log, u, l;
+		var log, u, l;
+		if (attrs){
+			log = attrs.log;
+		}
 		if (log){
 			l = log.slice(0, -1);
 			u = log.slice(-1);
+			if (!u.match('h|d|m')){
+				u = 'h';
+				l = log;
+			}
 			l = new Number(l);
 			this.set('value', l);
 			this.set('unit', u);
@@ -33,7 +41,7 @@ qLog.Task = Backbone.Model.extend({
 		if (v === 'undefined' || u === 'undefined'){
 			msg.push("Time is mandatory");
 		}
-		if (Number.isNaN(v)){
+		if (!isFinite(v)){
 			msg.push('Invalid time spend value provided. Use the syntax like 1.5d, 1.5h, 30m');
 		}
 		if (v <=0 ){

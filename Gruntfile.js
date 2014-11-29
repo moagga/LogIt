@@ -26,19 +26,21 @@ module.exports = function(grunt) {
 					'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
 				}	
 			}
+		},
+		
+		qunit: {
+			all: ['test/**/*.html']
 		}
 	});
 
-	// Load the plugin that provides the "uglify" task.
-//	grunt.loadNpmTasks('grunt-contrib-uglify');
-  
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 //	grunt.loadNpmTasks('grunt-contrib-jshint');
-//	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-contrib-qunit');
 //	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('test', ['qunit']);
+  grunt.registerTask('default', ['qunit', 'concat', 'uglify']);
 
 };
