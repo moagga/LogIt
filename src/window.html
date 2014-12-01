@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Q Log</title>
+	<link href="css/bootstrap.css" rel="stylesheet" >
+	<link href="css/bootstrap-theme.css" rel="stylesheet" >
+	
+	<script>
+	var qLog = {};
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row editor">
+			<h3>Log Time</h3>
+			<form class="" role="form">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label class="sr-only" for="task">Task</label>
+						<input type="text" class="form-control" id="task" placeholder="Task" autofocus="" required="">
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="form-group">
+						<label class="sr-only" for="log">Log</label>
+						<input type="text" class="form-control" id="log" placeholder="Time (45m, 1h, .5d)" required="" pattern="\d*(m|h|d)">
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="form-group">
+						<label class="sr-only" for="date">Date</label>
+						<input type="text" class="form-control datePicker" id="date" placeholder="Date">
+					</div>
+				</div>
+				<div class="col-xs-1">
+					<button type="submit" class="btn btn-default" id="addLog">Log</button>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row weekView">
+			<div class="controls">
+				<button class="prev">P</button>
+				<button class="next">N</button>
+				<h3>November 24-30 2014</h3>
+			</div>
+			<div class="summary" id="results">
+			</div>
+		</div>
+	</div>
+		
+</body>
+
+<script type="text/template" id="day-template">
+	<h4><%= dateString %></h4>
+	<ul class="list-group">
+	</ul>
+</script>
+
+
+<script type="text/template" id="item-template">
+	<button type="button" class="btn btn-default btn-xs pull-right remove">
+		<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
+	</button>
+	<span class="badge"><%= log %></span>
+	<%= task %>
+</script>
+ 
+<script src="lib/dateJs.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/backbone.js"></script>
+<script src="lib/bootstrap-datepicker.js"></script>
+<script src="utils/datastore-indexdb.js"></script>
+<script src="model/model.js"></script>
+<script src="view/EditView.js"></script>
+<script src="view/SummaryView.js"></script>
+<script src="view/DayView.js"></script>
+<script src="view/TaskView.js"></script>
+<script src="app.js"></script>
+
+</html>
