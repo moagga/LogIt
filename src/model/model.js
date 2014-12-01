@@ -29,23 +29,28 @@ qLog.Task = Backbone.Model.extend({
 		}
 	},
 	
-	validate: function(attrs, options){
-		var v = attrs.value, u = attrs.unit, t = attrs.task, d = attrs.date;
+	isValidModel: function(){
+		var v = this.get('value'), u = this.get('unit'), t = this.get('task'), d = this.get('date');
 		var msg = [];
-		if (t === 'undefined'){
+		if (t == null){
 			msg.push("Task description is mandatory");
 		}
-		if (d === 'undefined'){
+		if (d == null){
 			msg.push("Date is mandatory");
 		}
-		if (v === 'undefined' || u === 'undefined'){
+		if (v == null){
 			msg.push("Time is mandatory");
+		} else {
+			if (!isFinite(v)){
+				msg.push('Invalid time spend value provided. Use the syntax like 1.5d, 1.5h, 30m');
+			}
+			if (v <=0 ){
+				msg.push('Time spend must be a positive number');
+			}
 		}
-		if (!isFinite(v)){
-			msg.push('Invalid time spend value provided. Use the syntax like 1.5d, 1.5h, 30m');
-		}
-		if (v <=0 ){
-			msg.push('Time spend must be a positive number');
+		
+		if (msg.length == 0){
+			return true;
 		}
 		return msg;
 	},
@@ -66,7 +71,7 @@ qLog.Task = Backbone.Model.extend({
 		}, this);
 	},
 	
-	toHour: function(){
+	toHour: function(precise){
 		var h, log = this.get('value'), unit = this.get('unit');
 		switch (unit){
 			case 'd':
@@ -79,7 +84,10 @@ qLog.Task = Backbone.Model.extend({
 				h = log / 60;
 				break;
 		}
-		return h.toPrecision(3);
+		if (precise){
+			h = h.toPrecision(3);
+		}
+		return h;
 	},
 	
 	getLogString: function(){
@@ -104,12 +112,8 @@ qLog.TaskCollection = Backbone.Collection.extend({
 	
 	model: qLog.Task,
 	
-	reset: function(items){
-		Backbone.Collection.prototype.reset.apply(this, arguments);
-	},
-	
 	day: function(d){
-		var refDate = d;
+		var refDate = d || Date.today();
 		var result = this.filter(function(item){
 			var date = item.get('date');
 			return refDate.compareTo(date) == 0;
