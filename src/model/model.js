@@ -49,10 +49,9 @@ qLog.Task = Backbone.Model.extend({
 			}
 		}
 		
-		if (msg.length == 0){
-			return true;
+		if (msg.length > 0){
+			return msg;
 		}
-		return msg;
 	},
 
 	sync: function(method, model, options){

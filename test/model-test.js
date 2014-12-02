@@ -47,7 +47,7 @@ QUnit.test( "Model validation - Negative value", function(assert) {
 QUnit.test( "Model validation - All values are valid", function(assert) {
 	var obj = new qLog.Task({task: '', date: Date.now(), log: '2h'});
 	var msg = obj.isValidModel();
-	assert.equal(msg, true);
+	assert.equal(msg, null);
 });
 
 QUnit.module('Model toHour');

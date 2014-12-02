@@ -18,19 +18,40 @@ qLog.EditView = Backbone.View.extend({
 			endDate: "today",
 			format: qLog.settings.dateFormat
 		});
+		this._reset();
 	},
 
 	submit: function() {
-		var tk = this.task.val();
-		var tm = this.log.val();
+		var tk = this.task.val() != "" ? this.task.val() : null;
+		var tm = this.log.val() != "" ? this.log.val() : null;
 		var date = Date.today();
-		var d = this.date.val();
+		var d = this.date.val() != "" ? this.date.val() : null;
 		if (d){
 			date = Date.parse(d, qLog.settings.dateFormat);
 		}
 		
-		qLog.Tasks.create({'task': tk, 'log': tm, date: date});
+		var m = new qLog.Task({'task': tk, 'log': tm, date: date});
+		var r = m.isValidModel();
+		if (r){
+			var h = "";
+			_.each(r, function(msg){
+				h += msg + "<br>";
+			});
+			$('.validationError').html(h);
+			return false;
+		} else {
+			$('.validationError').html('');
+			qLog.Tasks.create(m);
+			this._reset();
+			return false;
+		}
 	},
+	
+	_reset: function(){
+		this.task.val('');
+		this.log.val('');
+		this.date.val('');
+	}
 	
 });
 
