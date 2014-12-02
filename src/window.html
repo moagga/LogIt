@@ -4,10 +4,8 @@
 	<title>Q Log</title>
 	<link href="css/bootstrap.css" rel="stylesheet" >
 	<link href="css/bootstrap-theme.css" rel="stylesheet" >
-	
-	<script>
-	var qLog = {};
-	</script>
+	<link href="css/datepicker3.css" rel="stylesheet" >
+	<link href="css/qLog.css" rel="stylesheet" >
 </head>
 <body>
 	<div class="container">
@@ -40,9 +38,13 @@
 		
 		<div class="row weekView">
 			<div class="controls">
-				<button class="prev">P</button>
-				<button class="next">N</button>
-				<h3>November 24-30 2014</h3>
+				<button type="button" class="btn btn-default btn-lg prev" id="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-lg next" id="prev">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</button>
+				<h3></h3>
 			</div>
 			<div class="summary" id="results">
 			</div>

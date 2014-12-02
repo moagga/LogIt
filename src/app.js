@@ -1,3 +1,4 @@
+var qLog = qLog || {};
 qLog.settings = {};
 qLog.settings.dateFormat = 'dd/mm/yyyy';
 

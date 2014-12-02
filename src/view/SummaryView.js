@@ -1,3 +1,4 @@
+var qLog = qLog || {};
 qLog.SummaryView = Backbone.View.extend({
 
 	el:  '.weekView',

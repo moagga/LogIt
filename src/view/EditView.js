@@ -1,3 +1,4 @@
+var qLog = qLog || {};
 qLog.EditView = Backbone.View.extend({
 
 	el:  '.editor',

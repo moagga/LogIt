@@ -1,3 +1,4 @@
+var qLog = qLog || {};
 (function(){
 	
 	var db;

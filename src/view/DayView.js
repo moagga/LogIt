@@ -1,14 +1,15 @@
+var qLog = qLog || {};
 qLog.DayView = Backbone.View.extend({
 
 	tagName:  'div',
-	className: 'col-lg-2 placeholder',
-	_tpl: _.template($('#day-template').html()),
+	className: 'column',
+//	_tpl: _.template($('#day-template').html()),
 	
 	initialize: function (options) {
 	},
 
 	render: function() {
-		var h = this._tpl(this.model);
+		var h = this._evaluate(this.model);
 		this.$el.html(h);
 		return this;
     },
@@ -19,7 +20,14 @@ qLog.DayView = Backbone.View.extend({
 	
 	_renderTask: function(task){
 		var view = new qLog.TaskView({model: task});
-		this.$el.append(view.render().el);
+		this.$('.list-group').append(view.render().el);
+	},
+
+	_evaluate: function(model){
+		var html = "<h4>" + model.dateString + "</h4>";
+		html += "<ul class='list-group'></ul>";
+		
+		return html;
 	}
 
 });
