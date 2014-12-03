@@ -12,7 +12,7 @@ qLog.SummaryView = Backbone.View.extend({
 	initialize: function (options) {
 		this.listenTo(qLog.Tasks, 'reset', this.renderAll);
 		this.startDate = Date.today().moveToDayOfWeek(1, -1);
-		this.title = this.$('.controls h3');
+		this.title = this.$('.controls .weekHeading');
 	},
 
 	renderAll: function(models){

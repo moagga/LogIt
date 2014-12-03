@@ -8,15 +8,15 @@
 	<link href="css/qLog.css" rel="stylesheet" >
 </head>
 <body>
-<!--
-	<nav class="navbar navbar-fixed-top" role="navigation">
+
+	<nav class="navbar " role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<span class="navbar-brand">Project name</span>
+				<span class="navbar-brand">Pro Time</span>
 			</div>
 		</div>
     </nav>
--->
+
 	<div class="container">
 		<div class="row editor">
 			<form id="editForm" role="form">
@@ -24,38 +24,38 @@
 					<div class="form-group">
 						<label class="sr-only" for="task">Task</label>
 						<input type="text" class="form-control" id="task" placeholder="Task" autofocus="" required="">
+						<p class="error text-danger"></p>
 					</div>
 				</div>
 				<div class="col-xs-2">
 					<div class="form-group">
 						<label class="sr-only" for="log">Log</label>
 						<input type="text" class="form-control" id="log" placeholder="Time (45m, 1h, .5d)" required="" pattern="\d*(m|h|d)">
+						<p class="text-danger"></p>
 					</div>
 				</div>
 				<div class="col-xs-2">
 					<div class="form-group">
 						<label class="sr-only" for="date">Date</label>
 						<input type="text" class="form-control datePicker" id="date" placeholder="Date (today default)">
+						<p class="text-danger"></p>
 					</div>
 				</div>
 				<div class="col-xs-1">
 					<button type="submit" class="btn btn-default" id="addLog">Log</button>
 				</div>
 			</form>
-			<p class="bg-danger validationError"></p>
 		</div>
 		
 		<div class="row weekView">
 			<div class="controls">
-				<div class="btn-group col-xs-2">
-					<button type="button" class="btn btn-default btn-lg prev" id="prev">
-						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					</button>
-					<button type="button" class="btn btn-default btn-lg next" id="prev">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</button>
-				</div>
-				<h3 class="col-xs-10"></h3>
+				<button type="button" class="btn btn-default btn-lg prev" id="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-lg next" id="prev">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</button>
+				<span class="h3 weekHeading"></span>
 			</div>
 			<div class="summary" id="results">
 			</div>

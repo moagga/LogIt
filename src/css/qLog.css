@@ -1,3 +1,35 @@
+.editor{
+	padding-bottom : 50px;
+}
+.form-group{
+	padding-bottom: 30px;
+}
+.form-group .error{
+	position: absolute;
+	padding: 5px;
+}
+.validationError{
+	position: absolute;
+	left: 0;
+	bottom: 50px;
+}
+.weekView{
+
+}
+.summary{
+
+}
+button.next,
+button.prev{
+    background-image: none;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: none;
+}
+.controls{
+	border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+}
 .column{
 	width: 14%;
 	float: left;
