@@ -2,20 +2,25 @@ var qLog = qLog || {};
 qLog.DayView = Backbone.View.extend({
 
 	tagName:  'div',
-	className: 'column',
-//	_tpl: _.template($('#day-template').html()),
+	className: 'column panel panel-info',
+	_tpl: _.template($('#day-template').html()),
 	
 	initialize: function (options) {
 	},
 
 	render: function() {
-		var h = this._evaluate(this.model);
+//		var h = this._evaluate(this.model);
+		var h = this._tpl(this.model);
 		this.$el.html(h);
 		return this;
     },
 	
 	showTasks: function(tasks){
 		_.each(tasks, this._renderTask, this);
+	},
+	
+	markToday: function(){
+		$(this.el).addClass('panel-warning');
 	},
 	
 	_renderTask: function(task){

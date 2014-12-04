@@ -4,56 +4,27 @@
 .form-group{
 	padding-bottom: 30px;
 }
-.form-group .error{
+.form-group p.text-danger{
 	position: absolute;
 	padding: 5px;
 }
-.validationError{
-	position: absolute;
-	left: 0;
-	bottom: 50px;
-}
-.weekView{
-
-}
-.summary{
-
-}
-button.next,
-button.prev{
-    background-image: none;
-    border: medium none;
-    border-radius: 0;
-    box-shadow: none;
-}
-.controls{
-	border-bottom: 1px solid #DDDDDD;
-    border-top: 1px solid #DDDDDD;
-}
 .column{
-	width: 14%;
+	width: 150px;
+	margin-left: 15px;
 	float: left;
-    border-bottom: 1px solid #DDDDDD;
 }
-.list-item{
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-    list-style: none outside none;
-    margin: 10px;
-    padding: 5px;
+.panel-body{
+	padding:0
 }
-.list-item .remove{
+.list-group{
+	margin-bottom: 0;
+}
+.list-group-item .remove{
+    bottom: 2px;
+    position: absolute;
+    right: 2px;
 	display: none;
 }
-.list-item.active{
-    box-shadow: 0 2px 2px #337ab7;
-}
-.list-item.active .remove{
+.list-group-item.active .remove{
 	display: block;
-}
-.column h4{
-    padding-bottom: 5px;
-    text-align: center;
-}
-.column h5{
-	font-weight: bold;
 }

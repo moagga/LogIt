@@ -1,9 +1,9 @@
 var qLog = qLog || {};
 qLog.TaskView = Backbone.View.extend({
 
-	tagName:  'li',
-	className: 'list-item',
-//	_tpl: _.template($('#item-template').html()),
+	tagName:  'a',
+	className: 'list-group-item',
+	_tpl: _.template($('#item-template').html()),
 	
 	events: {
 		'click .remove': 'remove',
@@ -15,10 +15,13 @@ qLog.TaskView = Backbone.View.extend({
 	},
 
 	render: function() {
-      this.$el.html(this._evaluate(this.model.attributes));
-//	  this.$el.on('mouseover', this.onmouseover);
-//	  this.$el.on('mouseout', this.onmouseout);
-      return this;
+		var obj = {
+			task: this.model.get('task'),
+			time: this.model.getLogString()
+		};
+		this.$el.html(this._tpl(obj));
+//      this.$el.html(this._evaluate(this.model.attributes));
+		return this;
     },
 	
 	onmouseover: function(){

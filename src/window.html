@@ -3,7 +3,6 @@
 <head>
 	<title>Q Log</title>
 	<link href="css/bootstrap.css" rel="stylesheet" >
-	<link href="css/bootstrap-theme.css" rel="stylesheet" >
 	<link href="css/datepicker3.css" rel="stylesheet" >
 	<link href="css/qLog.css" rel="stylesheet" >
 </head>
@@ -24,40 +23,62 @@
 					<div class="form-group">
 						<label class="sr-only" for="task">Task</label>
 						<input type="text" class="form-control" id="task" placeholder="Task" autofocus="" required="">
-						<p class="error text-danger"></p>
+						<p class="text-danger task"></p>
 					</div>
 				</div>
-				<div class="col-xs-2">
+				<div class="col-xs-3">
 					<div class="form-group">
 						<label class="sr-only" for="log">Log</label>
 						<input type="text" class="form-control" id="log" placeholder="Time (45m, 1h, .5d)" required="" pattern="\d*(m|h|d)">
-						<p class="text-danger"></p>
+						<p class="text-danger log"></p>
 					</div>
 				</div>
 				<div class="col-xs-2">
 					<div class="form-group">
 						<label class="sr-only" for="date">Date</label>
 						<input type="text" class="form-control datePicker" id="date" placeholder="Date (today default)">
-						<p class="text-danger"></p>
+						<p class="text-danger date"></p>
 					</div>
 				</div>
 				<div class="col-xs-1">
-					<button type="submit" class="btn btn-default" id="addLog">Log</button>
+					<button type="submit" class="btn btn-primary" id="addLog">Log</button>
 				</div>
 			</form>
 		</div>
+
+		<nav class="navbar navbar-default controls" >
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="btn btn-default navbar-btn prev" id="prev">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-default navbar-btn next" id="prev">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</button>
+					<h3 class="navbar-right navbar-text weekHeading"></h3>
+				</div>
+			</div>
+		</nav>		
 		
 		<div class="row weekView">
-			<div class="controls">
-				<button type="button" class="btn btn-default btn-lg prev" id="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				</button>
-				<button type="button" class="btn btn-default btn-lg next" id="prev">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				</button>
-				<span class="h3 weekHeading"></span>
-			</div>
 			<div class="summary" id="results">
+				<div class="column panel panel-primary">
+					<div class="panel-heading">
+						<h2 class="panel-title">Dec 04, 2014</h2>
+						<span>6 hours</span>
+					</div>
+					<div class="panel-body">
+						<div class="list-group">
+							<a class="list-group-item" href="#">
+								<h4 class="list-group-item-heading">Code Review</h4>
+								<p class="list-group-item-text">8 hours</p>
+								<button type="button" class="btn btn-default btn-xs pull-right remove">
+									<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -65,18 +86,23 @@
 </body>
 
 <script type="text/template" id="day-template">
-	<h4><%= dateString %></h4>
-	<ul class="list-group">
-	</ul>
+		<div class="panel-heading">
+			<h2 class="panel-title"><%= dateString %></h2>
+			<span><%= totalHrs %></span>
+		</div>
+		<div class="panel-body">
+			<div class="list-group"></div>
+		</div>
+	</div>
 </script>
 
 
 <script type="text/template" id="item-template">
+	<h4 class="list-group-item-heading"><%= task %></h4>
+	<p class="list-group-item-text"><%= time %></p>
 	<button type="button" class="btn btn-default btn-xs pull-right remove">
 		<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
 	</button>
-	<span class="badge"><%= log %></span>
-	<%= task %>
 </script>
  
 <script src="lib/dateJs.js"></script>

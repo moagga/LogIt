@@ -30,27 +30,29 @@ qLog.EditView = Backbone.View.extend({
 			date = Date.parse(d, qLog.settings.dateFormat);
 		}
 		
+		this.$('.form-group').removeClass('has-error');
+		this.$('p.text-danger').html('');
 		var m = new qLog.Task({'task': tk, 'log': tm, date: date});
 		var r = m.isValidModel();
 		if (r){
 			var h = "";
-			_.each(r, function(msg){
-				h += msg + "<br>";
-			});
-			$('.validationError').html(h);
-			return false;
+			for (var m in r){
+				var q = 'p.text-danger.' + m;
+				this.$(q).html(r[m]);
+				this.$(q).parent().addClass('has-error');
+			}
 		} else {
-			$('.validationError').html('');
 			qLog.Tasks.create(m);
 			this._reset();
-			return false;
 		}
+		return false;
 	},
 	
 	_reset: function(){
 		this.task.val('');
 		this.log.val('');
 		this.date.val('');
+		this.task.focus();
 	}
 	
 });

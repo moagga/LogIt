@@ -31,25 +31,25 @@ qLog.Task = Backbone.Model.extend({
 	
 	isValidModel: function(){
 		var v = this.get('value'), u = this.get('unit'), t = this.get('task'), d = this.get('date');
-		var msg = [];
+		var msg = {};
 		if (t == null){
-			msg.push("Task description is mandatory");
+			msg.task = "Task description is mandatory";
 		}
 		if (d == null){
-			msg.push("Date is mandatory");
+			msg.date = "Date is mandatory";
 		}
 		if (v == null){
-			msg.push("Time is mandatory");
+			msg.log = "Time is mandatory";
 		} else {
 			if (!isFinite(v)){
-				msg.push('Invalid time spend value provided. Use the syntax like 1.5d, 1.5h, 30m');
+				msg.log = 'Incorrect syntax. Use like 1.5d, 1.5h, 30m';
 			}
 			if (v <=0 ){
-				msg.push('Time spend must be a positive number');
+				msg.log = 'Incorrect value. Use positive numbers';
 			}
 		}
 		
-		if (msg.length > 0){
+		if (!_.isEmpty(msg)){
 			return msg;
 		}
 	},
@@ -90,7 +90,7 @@ qLog.Task = Backbone.Model.extend({
 	},
 	
 	getLogString: function(){
-		var str, log = this.get('log'), unit = this.get('unit');
+		var str, log = this.get('value'), unit = this.get('unit');
 		switch (unit){
 			case 'd':
 				str = 'days';
@@ -125,7 +125,7 @@ qLog.TaskCollection = Backbone.Collection.extend({
 		_.each(items, function(item){
 			sum += item.toHour();
 		});
-		return sum;
+		return sum.toPrecision(3);
 	}
 	
 });
