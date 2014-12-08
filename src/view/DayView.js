@@ -3,14 +3,14 @@ qLog.DayView = Backbone.View.extend({
 
 	tagName:  'div',
 	className: 'column panel panel-info',
-	_tpl: _.template($('#day-template').html()),
+//	_tpl: _.template($('#day-template').html()),
 	
 	initialize: function (options) {
 	},
 
 	render: function() {
-//		var h = this._evaluate(this.model);
-		var h = this._tpl(this.model);
+		var h = this._evaluate(this.model);
+//		var h = this._tpl(this.model);
 		this.$el.html(h);
 		return this;
     },
@@ -29,8 +29,13 @@ qLog.DayView = Backbone.View.extend({
 	},
 
 	_evaluate: function(model){
-		var html = "<h4>" + model.dateString + "</h4>";
-		html += "<ul class='list-group'></ul>";
+		var html = "<div class='panel-heading'>"
+		html += "<h2 class='panel-title'>" + model.dateString + "</h2>";
+		html += "<span>" + model.totalHrs + "</span>";
+		html += "</div>";
+		html += "<div class='panel-body'>";
+		html += "<div class='list-group'></div>";
+		html += "</div>";
 		
 		return html;
 	}

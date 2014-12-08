@@ -8,10 +8,11 @@
 </head>
 <body>
 
-	<nav class="navbar " role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<span class="navbar-brand">Pro Time</span>
+				<a class="navbar-brand" href="#">BOOST</a>
+				<p class="navbar-text">Work, Log, Quick</p>
 			</div>
 		</div>
     </nav>
@@ -49,13 +50,13 @@
 		<nav class="navbar navbar-default controls" >
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="btn btn-default navbar-btn prev" id="prev">
+					<button type="button" class="btn btn-default navbar-btn navbar-left prev" id="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 					</button>
-					<button type="button" class="btn btn-default navbar-btn next" id="prev">
+					<h3 class="navbar-left navbar-text weekHeading"></h3>
+					<button type="button" class="btn btn-default navbar-btn navbar-left next" id="prev">
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</button>
-					<h3 class="navbar-right navbar-text weekHeading"></h3>
 				</div>
 			</div>
 		</nav>		
@@ -83,16 +84,18 @@
 		</div>
 	</div>
 		
+	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+		<div class="container">* 1 Day = 8 Hours</div>
+	</nav>
 </body>
 
 <script type="text/template" id="day-template">
-		<div class="panel-heading">
-			<h2 class="panel-title"><%= dateString %></h2>
-			<span><%= totalHrs %></span>
-		</div>
-		<div class="panel-body">
-			<div class="list-group"></div>
-		</div>
+	<div class="panel-heading">
+		<h2 class="panel-title"><%= dateString %></h2>
+		<span><%= totalHrs %></span>
+	</div>
+	<div class="panel-body">
+		<div class="list-group"></div>
 	</div>
 </script>
 

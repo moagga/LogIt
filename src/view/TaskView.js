@@ -3,7 +3,7 @@ qLog.TaskView = Backbone.View.extend({
 
 	tagName:  'a',
 	className: 'list-group-item',
-	_tpl: _.template($('#item-template').html()),
+//	_tpl: _.template($('#item-template').html()),
 	
 	events: {
 		'click .remove': 'remove',
@@ -19,8 +19,8 @@ qLog.TaskView = Backbone.View.extend({
 			task: this.model.get('task'),
 			time: this.model.getLogString()
 		};
-		this.$el.html(this._tpl(obj));
-//      this.$el.html(this._evaluate(this.model.attributes));
+//		this.$el.html(this._tpl(obj));
+      this.$el.html(this._evaluate(obj));
 		return this;
     },
 	
@@ -37,14 +37,11 @@ qLog.TaskView = Backbone.View.extend({
 	},
 	
 	_evaluate: function(model){
-		var html = "<h5>" + model.log;
+		var html = "<h4 class='list-group-item-heading'>" + model.task + "</h4>";
+		html += "<p class='list-group-item-text'>" + model.time + "</p>";
 		html += "<button type='button' class='btn btn-default btn-xs pull-right remove'>";
 		html += "<span class='glyphicon glyphicon glyphicon-trash'></span>";
 		html += "</button>";
-//		html += "<span class='badge'>" + model.log + "</span>";
-		html += "</h5>";
-		html += model.task;
-		
 		return html;
 	}
 	
