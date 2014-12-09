@@ -110,6 +110,12 @@ qLog.Task = Backbone.Model.extend({
 qLog.TaskCollection = Backbone.Collection.extend({
 	
 	model: qLog.Task,
+	taskNames: [],
+	
+	reset: function(models, options){
+		Backbone.Collection.prototype.reset.apply(this, models, options);
+		this.taskNames = this.pluck('task');
+	},
 	
 	day: function(d){
 		var refDate = d || Date.today();
@@ -126,6 +132,23 @@ qLog.TaskCollection = Backbone.Collection.extend({
 			sum += item.toHour();
 		});
 		return sum.toPrecision(3);
+	},
+	
+	match: function(q){
+		/*
+		var result = this.filter(function(item){
+			var t = item.get('task');
+			t = t.toLowerCase();
+			q = q.toLowerCase();
+			return t.lastIndexOf(q) === 0;
+		});
+		*/
+		q = q.toLowerCase();
+		var result = _.each(this.taskNames, function(item){
+			return item.toLowerCase().lastIndexOf(q) === 0;
+		});
+		result = _.uniq(result);
+		return result;
 	}
 	
 });

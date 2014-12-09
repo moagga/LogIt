@@ -18,6 +18,17 @@ qLog.EditView = Backbone.View.extend({
 			endDate: "today",
 			format: qLog.settings.dateFormat
 		});
+		$('#task').typeahead({
+			minLength: 1,
+			highlight: true,
+		},
+		{
+			name: 'tasks',
+			displayKey: function(item){
+				return item;
+			},
+			source: this._filter
+		});
 		this._reset();
 	},
 
@@ -53,6 +64,12 @@ qLog.EditView = Backbone.View.extend({
 		this.log.val('');
 		this.date.val('');
 		this.task.focus();
+	},
+	
+	_filter: function(q, cb){
+		var results = qLog.Tasks.match(q);
+		//[{value: 'Task 1'}, {value: 'Task 2'}, {value: 'Task 3'}];
+		cb(results);
 	}
 	
 });
