@@ -55,7 +55,7 @@ qLog.SummaryView = Backbone.View.extend({
 		if (Date.today().equals(date)){
 			view.markToday();
 		}
-		if (tasks.length != 0){
+		if (tasks.length !== 0){
 			view.showTasks(tasks);
 		}
 	}

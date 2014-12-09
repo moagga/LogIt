@@ -30,17 +30,22 @@ module.exports = function(grunt) {
 		
 		qunit: {
 			all: ['test/**/*.html']
+		},
+		
+		jshint: {
+			files : ['src/model/**/*.js', 'src/view/**/*.js'],
+//			ignores : ['src/lib/**/*.js', 'test/**/*.js']
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-//	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
-//	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 
-  // Default task(s).
-  grunt.registerTask('test', ['qunit']);
-  grunt.registerTask('default', ['qunit', 'concat', 'uglify']);
+	//Tasks
+	grunt.registerTask('test', ['qunit']);
+	grunt.registerTask('hint', ['jshint']);
+	grunt.registerTask('default', ['qunit', 'jshint', 'concat', 'uglify']);
 
 };

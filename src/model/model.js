@@ -22,7 +22,7 @@ qLog.Task = Backbone.Model.extend({
 				u = 'h';
 				l = log;
 			}
-			l = new Number(l);
+			l = Number(l);
 			this.set('value', l);
 			this.set('unit', u);
 			this.unset('log');
@@ -32,13 +32,13 @@ qLog.Task = Backbone.Model.extend({
 	isValidModel: function(){
 		var v = this.get('value'), u = this.get('unit'), t = this.get('task'), d = this.get('date');
 		var msg = {};
-		if (t == null){
+		if (t === null){
 			msg.task = "Task description is mandatory";
 		}
-		if (d == null){
+		if (d === null){
 			msg.date = "Date is mandatory";
 		}
-		if (v == null){
+		if (typeof(v) === 'undefined'){
 			msg.log = "Time is mandatory";
 		} else {
 			if (!isFinite(v)){
@@ -115,7 +115,7 @@ qLog.TaskCollection = Backbone.Collection.extend({
 		var refDate = d || Date.today();
 		var result = this.filter(function(item){
 			var date = item.get('date');
-			return refDate.compareTo(date) == 0;
+			return refDate.compareTo(date) === 0;
 		});
 		return result;
 	},

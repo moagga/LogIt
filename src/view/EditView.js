@@ -22,10 +22,10 @@ qLog.EditView = Backbone.View.extend({
 	},
 
 	submit: function() {
-		var tk = this.task.val() != "" ? this.task.val() : null;
-		var tm = this.log.val() != "" ? this.log.val() : null;
+		var tk = this.task.val() !== "" ? this.task.val() : null;
+		var tm = this.log.val() !== "" ? this.log.val() : null;
 		var date = Date.today();
-		var d = this.date.val() != "" ? this.date.val() : null;
+		var d = this.date.val() !== "" ? this.date.val() : null;
 		if (d){
 			date = Date.parse(d, qLog.settings.dateFormat);
 		}
@@ -36,9 +36,9 @@ qLog.EditView = Backbone.View.extend({
 		var r = m.isValidModel();
 		if (r){
 			var h = "";
-			for (var m in r){
-				var q = 'p.text-danger.' + m;
-				this.$(q).html(r[m]);
+			for (var s in r){
+				var q = 'p.text-danger.' + s;
+				this.$(q).html(r[s]);
 				this.$(q).parent().addClass('has-error');
 			}
 		} else {
