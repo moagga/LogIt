@@ -68,7 +68,6 @@ qLog.EditView = Backbone.View.extend({
 	
 	_filter: function(q, cb){
 		var results = qLog.Tasks.match(q);
-		//[{value: 'Task 1'}, {value: 'Task 2'}, {value: 'Task 3'}];
 		cb(results);
 	}
 	

@@ -34,24 +34,24 @@ QUnit.test( "Test filtering based on day", function(assert) {
 
 });
 QUnit.test( "Test match for type ahead", function(assert) {
-	var t1 = new qLog.Task({date: Date.today(), task: 'Task one'});
-	var t2 = new qLog.Task({date: Date.today(), task: 'Task two'});
-	var t3 = new qLog.Task({date: Date.today(), task: 'Task Three'});
+	var t1 = new qLog.Task({date: Date.today(), task: 'Task A1'});
+	var t2 = new qLog.Task({date: Date.today(), task: 'Task A2'});
+	var t3 = new qLog.Task({date: Date.today(), task: 'Task A3'});
 	
 	var col = new qLog.TaskCollection();
 	col.add([t1, t2, t3]);
 	
 	var ignoreCaseMatches = col.match('task');
 	assert.equal(3, ignoreCaseMatches.length);
-	assert.equal(t1, ignoreCaseMatches[0]);
-	assert.equal(t2, ignoreCaseMatches[1]);
-	assert.equal(t3, ignoreCaseMatches[2]);
+	assert.equal('Task A1', ignoreCaseMatches[0]);
+	assert.equal('Task A2', ignoreCaseMatches[1]);
+	assert.equal('Task A3', ignoreCaseMatches[2]);
 
-	var zeroMatch = col.match('one');
-	assert.equal(0, zeroMatch.length);
+	var wordMatch = col.match('a');
+	assert.equal(3, wordMatch.length);
 
-	var exactMatch = col.match('task three');
+	var exactMatch = col.match('A3');
 	assert.equal(1, exactMatch.length);
-	assert.equal(t3, exactMatch[0]);
+	assert.equal('Task A3', exactMatch[0]);
 	
 });
