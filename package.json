@@ -1,6 +1,6 @@
 {
-  "name": "ProTime",
-  "version": "1.0.0",
+  "name": "LogIt",
+  "version": "0.1.0",
   "description": "Time sheet application for local usage.",
   "main": "app.js",
   "scripts": {

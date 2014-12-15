@@ -1,6 +1,7 @@
 {
-	"name": "Boost",
-	"description": "Work Log Quick",
+	"name": "LogIt",
+	"short_name": "Log It",
+	"description": "Quickly log your work in this offline time sheet",
 	"version": "0.1.0",
 	"manifest_version": 2,
 	"app": {
@@ -14,4 +15,5 @@
 		"48" : "img/48.png",
 		"128" : "img/128.png" 
 	}
+	
 }
