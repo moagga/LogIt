@@ -45,3 +45,6 @@ Temporary Items
 node_modules/*
 #Ignoring distribution folder
 dist/*
+
+#Ignoring web store private key
+*.pem
