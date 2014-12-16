@@ -1,3 +1,6 @@
+html, body{
+	overflow-y: visible;
+}
 .editor{
 	padding-bottom : 30px;
 }
@@ -7,6 +10,9 @@
 .form-group p.text-danger{
 	position: absolute;
 	padding: 5px;
+}
+.weekView{
+	padding-bottom: 60px;
 }
 .column{
 	width: 150px;
