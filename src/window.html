@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Q Log</title>
+	<title>LogIt</title>
 	<link href="css/bootstrap.css" rel="stylesheet" >
 	<link href="css/bootstrap.sandstone.min.css" rel="stylesheet" >
 	<link href="css/datepicker3.css" rel="stylesheet" >
@@ -12,7 +12,7 @@
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">LOG IT</a>
+				<a class="navbar-brand" href="#">LogIt</a>
 				<p class="navbar-text">Work Log Quick</p>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 				<div class="col-xs-3">
 					<div class="form-group">
 						<label class="sr-only" for="log">Log</label>
-						<input type="text" class="form-control" id="log" placeholder="Time (45m, 1h, .5d)" required="" pattern="\d*(m|h|d)">
+						<input type="text" class="form-control" id="log" placeholder="Time (45m, 1h, .5d)" required="" >
 						<p class="text-danger log"></p>
 					</div>
 				</div>
@@ -63,30 +63,12 @@
 		</nav>		
 		
 		<div class="row weekView">
-			<div class="summary" id="results">
-				<div class="column panel panel-primary">
-					<div class="panel-heading">
-						<h2 class="panel-title">Dec 04, 2014</h2>
-						<span>6 hours</span>
-					</div>
-					<div class="panel-body">
-						<div class="list-group">
-							<a class="list-group-item" href="#">
-								<h4 class="list-group-item-heading">Code Review</h4>
-								<p class="list-group-item-text">8 hours</p>
-								<button type="button" class="btn btn-default btn-xs pull-right remove">
-									<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span>
-								</button>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="summary" id="results"></div>
 		</div>
 	</div>
 		
 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-		<div class="container">* 1 Day = 8 Hours</div>
+		<p class="navbar-text">* 1 Day = 8 Hours</p>
 	</nav>
 </body>
 
