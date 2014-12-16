@@ -1,5 +1,5 @@
-var qLog = qLog || {};
-qLog.TaskView = Backbone.View.extend({
+var LogIt = LogIt || {};
+LogIt.TaskView = Backbone.View.extend({
 
 	tagName:  'a',
 	className: 'list-group-item',

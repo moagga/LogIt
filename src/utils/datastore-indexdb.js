@@ -1,9 +1,9 @@
-var qLog = qLog || {};
+var LogIt = LogIt || {};
 (function(){
 	
 	var db;
 	var version = 1;
-	var request = indexedDB.open("qLog", version);
+	var request = indexedDB.open("LogIt", version);
 	request.onsuccess = function(e) {
 		db = e.target.result;
 		fetchAll();
@@ -11,15 +11,15 @@ var qLog = qLog || {};
 	
 	request.onupgradeneeded = function(e) {
 		var db = e.target.result;
-		if(db.objectStoreNames.contains("qLog")) {
-			db.deleteObjectStore("qLog");
+		if(db.objectStoreNames.contains("LogIt")) {
+			db.deleteObjectStore("LogIt");
 		}
-		db.createObjectStore("qLog", {keyPath: "timestamp"});
+		db.createObjectStore("LogIt", {keyPath: "timestamp"});
 	};
 	
 	var sync = function(method, obj, callback, context){
-		var trans = db.transaction(["qLog"], "readwrite");
-		var store = trans.objectStore("qLog");
+		var trans = db.transaction(["LogIt"], "readwrite");
+		var store = trans.objectStore("LogIt");
 		var r;
 		switch (method){
 			case 'put':
@@ -38,7 +38,7 @@ var qLog = qLog || {};
 		r.onsuccess = function(e) {
 			console.log(e.target.result);
 			callback.apply(context, [e.target.result]);
-			qLog.ds.load();
+			LogIt.ds.load();
 		};
 		r.onerror = function(e) {
 			console.log(e.value);
@@ -46,8 +46,8 @@ var qLog = qLog || {};
 	};
 	
 	var fetchAll = function(callback){
-		var trans = db.transaction(["qLog"], "readwrite");
-		var store = trans.objectStore("qLog");
+		var trans = db.transaction(["LogIt"], "readwrite");
+		var store = trans.objectStore("LogIt");
 		var r;
 		var keyRange = IDBKeyRange.lowerBound(0);
 		var cursorRequest = store.openCursor(keyRange);
@@ -59,12 +59,12 @@ var qLog = qLog || {};
 				items.push(result.value);
 				result.continue();
 			} else {
-				qLog.Tasks.reset(items);
+				LogIt.Tasks.reset(items);
 			}
 		};
 	};
 	
-	qLog.ds = {
+	LogIt.ds = {
 		load: fetchAll,
 		sync: sync
 	};

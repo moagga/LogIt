@@ -1,7 +1,7 @@
-var qLog = qLog || {};
-qLog.settings = {};
-qLog.settings.dateFormat = 'dd/MM/yyyy';
+var LogIt = LogIt || {};
+LogIt.settings = {};
+LogIt.settings.dateFormat = 'dd/MM/yyyy';
 
-qLog.Tasks = new qLog.TaskCollection();
-new qLog.EditView();
-new qLog.SummaryView();
+LogIt.Tasks = new LogIt.TaskCollection();
+new LogIt.EditView();
+new LogIt.SummaryView();

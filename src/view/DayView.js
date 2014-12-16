@@ -1,5 +1,5 @@
-var qLog = qLog || {};
-qLog.DayView = Backbone.View.extend({
+var LogIt = LogIt || {};
+LogIt.DayView = Backbone.View.extend({
 
 	tagName:  'div',
 	className: 'column panel panel-info',
@@ -24,7 +24,7 @@ qLog.DayView = Backbone.View.extend({
 	},
 	
 	_renderTask: function(task){
-		var view = new qLog.TaskView({model: task});
+		var view = new LogIt.TaskView({model: task});
 		this.$('.list-group').append(view.render().el);
 	},
 

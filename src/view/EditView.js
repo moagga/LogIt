@@ -1,5 +1,5 @@
-var qLog = qLog || {};
-qLog.EditView = Backbone.View.extend({
+var LogIt = LogIt || {};
+LogIt.EditView = Backbone.View.extend({
 
 	el:  '.editor',
 	
@@ -16,7 +16,7 @@ qLog.EditView = Backbone.View.extend({
 			autoclose: true,
 			todayHighlight: true,
 			endDate: "today",
-			format: qLog.settings.dateFormat
+			format: LogIt.settings.dateFormat
 		});
 		$('#task').typeahead({
 			minLength: 1,
@@ -38,12 +38,12 @@ qLog.EditView = Backbone.View.extend({
 		var date = Date.today();
 		var d = this.date.val() !== "" ? this.date.val() : null;
 		if (d){
-			date = Date.parse(d, qLog.settings.dateFormat);
+			date = Date.parse(d, LogIt.settings.dateFormat);
 		}
 		
 		this.$('.form-group').removeClass('has-error');
 		this.$('p.text-danger').html('');
-		var m = new qLog.Task({'task': tk, 'log': tm, date: date});
+		var m = new LogIt.Task({'task': tk, 'log': tm, date: date});
 		var r = m.isValidModel();
 		if (r){
 			var h = "";
@@ -53,7 +53,7 @@ qLog.EditView = Backbone.View.extend({
 				this.$(q).parent().addClass('has-error');
 			}
 		} else {
-			qLog.Tasks.create(m);
+			LogIt.Tasks.create(m);
 			this._reset();
 		}
 		return false;
@@ -67,7 +67,7 @@ qLog.EditView = Backbone.View.extend({
 	},
 	
 	_filter: function(q, cb){
-		var results = qLog.Tasks.match(q);
+		var results = LogIt.Tasks.match(q);
 		cb(results);
 	}
 	

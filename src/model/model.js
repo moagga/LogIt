@@ -1,5 +1,5 @@
-var qLog = qLog || {};
-qLog.Task = Backbone.Model.extend({
+var LogIt = LogIt || {};
+LogIt.Task = Backbone.Model.extend({
 
 	idAttribute : 'timestamp',
 	
@@ -65,7 +65,7 @@ qLog.Task = Backbone.Model.extend({
 		}
 		
 		//Possibility of mocking datastore to test sync function.
-		var ds = options.ds || qLog.ds;
+		var ds = options.ds || LogIt.ds;
 		ds.sync(m, obj, function(result){
 		}, this);
 	},
@@ -107,9 +107,9 @@ qLog.Task = Backbone.Model.extend({
 
 });
 
-qLog.TaskCollection = Backbone.Collection.extend({
+LogIt.TaskCollection = Backbone.Collection.extend({
 	
-	model: qLog.Task,
+	model: LogIt.Task,
 	
 	day: function(d){
 		var refDate = d || Date.today();

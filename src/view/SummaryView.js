@@ -1,5 +1,5 @@
-var qLog = qLog || {};
-qLog.SummaryView = Backbone.View.extend({
+var LogIt = LogIt || {};
+LogIt.SummaryView = Backbone.View.extend({
 
 	el:  'body',
 	startDate: null,
@@ -16,7 +16,7 @@ qLog.SummaryView = Backbone.View.extend({
 		} else {
 			this.startDate = Date.today().moveToDayOfWeek(1, -1);
 		}
-		this.listenTo(qLog.Tasks, 'reset', this.renderAll);
+		this.listenTo(LogIt.Tasks, 'reset', this.renderAll);
 		this.title = this.$('.controls .weekHeading');
 	},
 
@@ -37,20 +37,20 @@ qLog.SummaryView = Backbone.View.extend({
 	
 	nextWeek: function(){
 		this.startDate.addDays(7);
-		this.renderAll(qLog.Tasks);
+		this.renderAll(LogIt.Tasks);
 	},
 	
 	prevWeek: function(){
 		this.startDate.addDays(-7);
-		this.renderAll(qLog.Tasks);
+		this.renderAll(LogIt.Tasks);
 	},
 	
 	_renderDay: function(date, tasks){
 		var sum, obj, view;
-		sum = qLog.Tasks.sum(tasks);
+		sum = LogIt.Tasks.sum(tasks);
 		sum += ' hours';
 		obj = {dateString: date.toString('ddd dd/MM/yyyy'), totalHrs: sum};
-		view = new qLog.DayView({model: obj});
+		view = new LogIt.DayView({model: obj});
 		$('#results').append(view.render().el);
 		if (Date.today().equals(date)){
 			view.markToday();
