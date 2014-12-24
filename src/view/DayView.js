@@ -30,7 +30,8 @@ LogIt.DayView = Backbone.View.extend({
 
 	_evaluate: function(model){
 		var html = "<div class='panel-heading'>";
-		html += "<h2 class='panel-title'>" + model.dateString + "</h2>";
+		html += "<h4>" + model.weekDay + "</h4>";
+		html += "<h5>" + model.dateString + "</h5>";
 		html += "<span>" + model.totalHrs + "</span>";
 		html += "</div>";
 		html += "<div class='panel-body'>";

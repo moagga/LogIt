@@ -16,7 +16,7 @@ LogIt.EditView = Backbone.View.extend({
 			autoclose: true,
 			todayHighlight: true,
 			endDate: "today",
-			format: LogIt.settings.dateFormat
+			format: 'd M yyyy'
 		});
 		$('#task').typeahead({
 			minLength: 1,
@@ -38,7 +38,7 @@ LogIt.EditView = Backbone.View.extend({
 		var date = Date.today();
 		var d = this.date.val() !== "" ? this.date.val() : null;
 		if (d){
-			date = Date.parse(d, LogIt.settings.dateFormat);
+			date = Date.parse(d, LogIt.Settings.dateFormat());
 		}
 		
 		this.$('.form-group').removeClass('has-error');

@@ -3,7 +3,7 @@
 <head>
 	<title>LogIt</title>
 	<link href="css/bootstrap.css" rel="stylesheet" >
-	<link href="css/bootstrap.sandstone.min.css" rel="stylesheet" >
+<!--	<link href="css/bootstrap.sandstone.min.css" rel="stylesheet" >-->
 	<link href="css/datepicker3.css" rel="stylesheet" >
 	<link href="css/qLog.css" rel="stylesheet" >
 </head>
@@ -54,10 +54,20 @@
 					<button type="button" class="btn btn-default navbar-btn navbar-left prev" id="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 					</button>
-					<h3 class="navbar-left navbar-text weekHeading"></h3>
+					<h3 class="navbar-text weekHeading"></h3>
 					<button type="button" class="btn btn-default navbar-btn navbar-left next" id="prev">
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					</button>
+					
+					<form class="navbar-form navbar-right" role="search">
+						<label class="radio-inline"><input type="radio" name="weekView" id="workWeek" value="workWeek">Work View</label>
+						<label class="radio-inline"><input type="radio" name="weekView" id="fullWeek" value="fullWeek">Full Week</label>
+						<div class="form-group">
+							<label for="dayHour">1 day = </label>
+							<input type="number" class="form-control" max="24" min="1" >
+							<label> hours</label>
+						</div>
+					</form>
 				</div>
 			</div>
 		</nav>		
@@ -98,6 +108,7 @@
 <script src="lib/bootstrap-datepicker.js"></script>
 <script src="lib/typeahead.js"></script>
 <script src="utils/datastore-indexdb.js"></script>
+<script src="utils/settings.js"></script>
 <script src="model/model.js"></script>
 <script src="view/EditView.js"></script>
 <script src="view/SummaryView.js"></script>

@@ -1,6 +1,6 @@
 {
   "name": "LogIt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Time sheet application for local usage.",
   "main": "app.js",
   "scripts": {

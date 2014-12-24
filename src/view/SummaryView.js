@@ -24,14 +24,15 @@ LogIt.SummaryView = Backbone.View.extend({
 		$('#results').html('');
 		var h = '';
 		var d = this.startDate.clone();
-		h += d.toString('MMM dd, yyyy');
+		var f = LogIt.Settings.dateFormat();
+		h += d.toString(f);
 		for (var i = 0; i < 7; i++){
 			var tasks = models.day(d);
 			this._renderDay(d, tasks);
 			d.addDays(1);
 		}
 		h += " - ";
-		h +=  d.addDays(-1).toString('MMM dd, yyyy');
+		h +=  d.addDays(-1).toString(f);
 		this.title.html(h);
 	},
 	
@@ -49,7 +50,11 @@ LogIt.SummaryView = Backbone.View.extend({
 		var sum, obj, view;
 		sum = LogIt.Tasks.sum(tasks);
 		sum += ' hours';
-		obj = {dateString: date.toString('ddd dd/MM/yyyy'), totalHrs: sum};
+		obj = {
+			weekDay: date.toString('ddd'),
+			dateString: date.toString(LogIt.Settings.dateFormat()),
+			totalHrs: sum
+		};
 		view = new LogIt.DayView({model: obj});
 		$('#results').append(view.render().el);
 		if (Date.today().equals(date)){

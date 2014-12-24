@@ -3,18 +3,22 @@ var LogIt = LogIt || {};
 	
 	var db;
 	var version = 1;
-	var request = indexedDB.open("LogIt", version);
-	request.onsuccess = function(e) {
-		db = e.target.result;
-		fetchAll();
-	};
 	
-	request.onupgradeneeded = function(e) {
-		var db = e.target.result;
-		if(db.objectStoreNames.contains("LogIt")) {
-			db.deleteObjectStore("LogIt");
-		}
-		db.createObjectStore("LogIt", {keyPath: "timestamp"});
+	var init = function(){
+		var request = indexedDB.open("LogIt", version);
+		request.onsuccess = function(e) {
+			db = e.target.result;
+			console.log('DB ready');
+			fetchAll();
+		};
+	
+		request.onupgradeneeded = function(e) {
+			var db = e.target.result;
+			if(db.objectStoreNames.contains("LogIt")) {
+				db.deleteObjectStore("LogIt");
+			}
+			db.createObjectStore("LogIt", {keyPath: "timestamp"});
+		};
 	};
 	
 	var sync = function(method, obj, callback, context){
@@ -66,6 +70,7 @@ var LogIt = LogIt || {};
 	
 	LogIt.ds = {
 		load: fetchAll,
-		sync: sync
+		sync: sync,
+		init: init
 	};
 })();
