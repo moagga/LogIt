@@ -7,7 +7,7 @@ var LogIt = LogIt || {};
 	var defaults = {
 		dateFormat : 'dateFirst',
 		dayHour: 8,
-		weekView : 'work'
+		weekView : 5
 	};
 	
 	var values = {
@@ -40,15 +40,11 @@ var LogIt = LogIt || {};
 		return val;
 	};
 	
-	var save = function(items, callback){
-		if (chrome){
-			chrome.storage.local.set(props, function(items){
-				for(var key in items){
-					values[key] = items[key];
-				}
-				callback(items);
-			});
-		}
+	var set = function(key, value){
+		values[key] = value;
+		var obj = {};
+		obj[key] = value;
+		chrome.storage.local.set(obj);
 	};
 	
 	var dateFormat = function(options){
@@ -60,9 +56,18 @@ var LogIt = LogIt || {};
 		return formats[form];
 	};
 	
+	var weekView = function(v){
+		if (v){
+			set('weekView', v);
+			return;
+		}
+		return get('weekView');
+		
+	};
+	
 	LogIt.Settings = {
 		dateFormat: dateFormat,
-		save: save,
+		weekView: weekView,
 		init: init
 	};
 	

@@ -11,6 +11,16 @@ html, body{
 	position: absolute;
 	padding: 5px;
 }
+.controls .navbar-header{
+	width: 97%;
+}
+.controls .dayHour{
+	margin-left: 10px;
+}
+.controls .dayHour input{
+	width: 70px;
+	text-align: center;
+}
 .weekView{
 	padding-bottom: 60px;
 }

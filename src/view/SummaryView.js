@@ -7,6 +7,9 @@ LogIt.SummaryView = Backbone.View.extend({
 	events: {
 		'click button.prev': 'prevWeek',
 		'click button.next': 'nextWeek',
+		'change input[name=weekView]': 'viewChange',
+		'click #editDayHour': 'editDayHour',
+		'change #dayHour': 'changeDayHour'
 	},
 	
 	initialize: function (options) {
@@ -21,12 +24,19 @@ LogIt.SummaryView = Backbone.View.extend({
 	},
 
 	renderAll: function(models){
+		models = models || LogIt.Tasks;
 		$('#results').html('');
 		var h = '';
 		var d = this.startDate.clone();
 		var f = LogIt.Settings.dateFormat();
 		h += d.toString(f);
-		for (var i = 0; i < 7; i++){
+		var view = LogIt.Settings.weekView();
+		if (view === 5){
+			$('#results').addClass('workView');
+		} else {
+			$('#results').removeClass('workView');
+		}
+		for (var i = 0; i < view; i++){
 			var tasks = models.day(d);
 			this._renderDay(d, tasks);
 			d.addDays(1);
@@ -38,12 +48,12 @@ LogIt.SummaryView = Backbone.View.extend({
 	
 	nextWeek: function(){
 		this.startDate.addDays(7);
-		this.renderAll(LogIt.Tasks);
+		this.renderAll();
 	},
 	
 	prevWeek: function(){
 		this.startDate.addDays(-7);
-		this.renderAll(LogIt.Tasks);
+		this.renderAll();
 	},
 	
 	_renderDay: function(date, tasks){
@@ -63,6 +73,22 @@ LogIt.SummaryView = Backbone.View.extend({
 		if (tasks.length !== 0){
 			view.showTasks(tasks);
 		}
-	}
+	},
 	
+	viewChange: function(e){
+		var v = $('input[name=weekView]:checked').val();
+		LogIt.Settings.weekView(parseInt(v));
+		this.renderAll();
+	},
+		
+	editDayHour: function(){
+		$('#dayHourForm').removeClass('hide');
+	},
+	
+	changeDayHour: function(){
+		var v = $('#dayHour').val();
+		$('#dayHourForm').addClass('hide');
+		
+	}
+
 });
