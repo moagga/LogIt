@@ -74,7 +74,7 @@ LogIt.Task = Backbone.Model.extend({
 		var h, log = this.get('value'), unit = this.get('unit');
 		switch (unit){
 			case 'd':
-				h = log * 8;
+				h = log * LogIt.Settings.dayHour();
 				break;
 			case 'h':
 				h = log;

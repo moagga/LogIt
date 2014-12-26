@@ -21,9 +21,6 @@ html, body{
 	width: 70px;
 	text-align: center;
 }
-.weekView{
-	padding-bottom: 60px;
-}
 .column{
 	width: 150px;
 	margin-left: 15px;
@@ -46,6 +43,14 @@ html, body{
 }
 .list-group-item.active .remove{
 	display: block;
+}
+
+/* Settings CSS */
+.settings .row{
+    padding-bottom: 20px;
+}
+#dayHours{
+	width: 70px;
 }
 
 /*Twitter typeahead plugin styles*/

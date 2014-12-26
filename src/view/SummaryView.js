@@ -7,9 +7,6 @@ LogIt.SummaryView = Backbone.View.extend({
 	events: {
 		'click button.prev': 'prevWeek',
 		'click button.next': 'nextWeek',
-		'change input[name=weekView]': 'viewChange',
-		'click #editDayHour': 'editDayHour',
-		'change #dayHour': 'changeDayHour'
 	},
 	
 	initialize: function (options) {
@@ -31,7 +28,7 @@ LogIt.SummaryView = Backbone.View.extend({
 		var f = LogIt.Settings.dateFormat();
 		h += d.toString(f);
 		var view = LogIt.Settings.weekView();
-		if (view === 5){
+		if (view === "5"){
 			$('#results').addClass('workView');
 		} else {
 			$('#results').removeClass('workView');
@@ -81,14 +78,4 @@ LogIt.SummaryView = Backbone.View.extend({
 		this.renderAll();
 	},
 		
-	editDayHour: function(){
-		$('#dayHourForm').removeClass('hide');
-	},
-	
-	changeDayHour: function(){
-		var v = $('#dayHour').val();
-		$('#dayHourForm').addClass('hide');
-		
-	}
-
 });

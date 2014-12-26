@@ -14,13 +14,15 @@ var LogIt = LogIt || {};
 	};
 	
 	var init = function(callback){
-		if (chrome){
+		if (storageAvailable()){
 			chrome.storage.local.get(props, function(items){
 				for(var key in items){
 					values[key] = items[key];
 				}
 				callback();
 			});
+		} else {
+			callback();
 		}
 	};
 	
@@ -40,11 +42,13 @@ var LogIt = LogIt || {};
 		return val;
 	};
 	
-	var set = function(key, value){
-		values[key] = value;
-		var obj = {};
-		obj[key] = value;
-		chrome.storage.local.set(obj);
+	var set = function(obj){
+		for (var key in obj){
+			values[key] = obj[key];
+		}
+		if (storageAvailable()){
+			chrome.storage.local.set(obj);
+		}
 	};
 	
 	var dateFormat = function(options){
@@ -56,18 +60,23 @@ var LogIt = LogIt || {};
 		return formats[form];
 	};
 	
-	var weekView = function(v){
-		if (v){
-			set('weekView', v);
-			return;
-		}
+	var weekView = function(){
 		return get('weekView');
-		
 	};
+
+	var dayHour = function(){
+		return get('dayHour');
+	};
+	
+	var storageAvailable = function(){
+		return window.chrome && window.chrome.storage;
+	}
 	
 	LogIt.Settings = {
 		dateFormat: dateFormat,
 		weekView: weekView,
+		dayHour: dayHour,
+		save: set,
 		init: init
 	};
 	
