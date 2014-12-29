@@ -28,12 +28,12 @@ var LogIt = LogIt || {};
 	
 	var get = function(key){
 		var val;
-		if (key == null){
+		if (key === null){
 			return null;
 		}
 		
 		//First, get from local storage
-		var val = values[key];
+		val = values[key];
 		//If not found, use default.
 		if (typeof val === 'undefined'){
 			val = defaults[key];
@@ -70,7 +70,7 @@ var LogIt = LogIt || {};
 	
 	var storageAvailable = function(){
 		return window.chrome && window.chrome.storage;
-	}
+	};
 	
 	LogIt.Settings = {
 		dateFormat: dateFormat,

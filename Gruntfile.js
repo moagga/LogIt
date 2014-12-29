@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 		},
 		
 		jshint: {
-			files : ['src/model/**/*.js', 'src/view/**/*.js'],
+			files : ['src/model/**/*.js', 'src/view/**/*.js', 'src/utils/**/*.js'],
 		}
 	});
 
