@@ -32,10 +32,10 @@ LogIt.Task = Backbone.Model.extend({
 	isValidModel: function(){
 		var v = this.get('value'), u = this.get('unit'), t = this.get('task'), d = this.get('date');
 		var msg = {};
-		if (t === null){
+		if (typeof(t) === 'undefined'){
 			msg.task = "Task description is mandatory";
 		}
-		if (d === null){
+		if (typeof(d) === 'undefined'){
 			msg.date = "Date is mandatory";
 		}
 		if (typeof(v) === 'undefined'){

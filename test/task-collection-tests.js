@@ -1,22 +1,44 @@
-QUnit.module('Task Collection test cases');
-QUnit.test( "Test adding hours of a day", function(assert) {
-	var t1 = new qLog.Task({log: '20m'}); 		
-	var t2 = new qLog.Task({log: '.5d'}); 		
-	var t3 = new qLog.Task({log: '1.25h'});		
+module('Task Collection test cases');
+test( "Test adding hours of a day - default dayhour", function(assert) {
+	LogIt.Settings = {
+		dayHour : function(){
+			return 8;
+		}
+	};
+	var t1 = new LogIt.Task({log: '20m'}); 		
+	var t2 = new LogIt.Task({log: '.5d'}); 		
+	var t3 = new LogIt.Task({log: '1.25h'});		
 	
-	var col = new qLog.TaskCollection();
+	var col = new LogIt.TaskCollection();
 	var res = col.sum([t1, t2, t3]);
 	assert.equal("string", typeof res);
 	assert.equal("5.58", res);
 
 });
-QUnit.test( "Test filtering based on day", function(assert) {
-	var yrday = new qLog.Task({date: Date.today().addDays(-1)});
-	var today1 = new qLog.Task({date: Date.today()});
-	var today2 = new qLog.Task({date: Date.today()});
-	var tmrww = new qLog.Task({date: Date.today().addDays(1)});
+test( "Test adding hours of a day - custom dayhour", function(assert) {
+	LogIt.Settings = {
+		dayHour : function(){
+			return 8.5;
+		}
+	};
+	var t1 = new LogIt.Task({log: '20m'}); 		
+	var t2 = new LogIt.Task({log: '.5d'}); 		
+	var t3 = new LogIt.Task({log: '1.25h'});		
 	
-	var col = new qLog.TaskCollection();
+	var col = new LogIt.TaskCollection();
+	var res = col.sum([t1, t2, t3]);
+	assert.equal("string", typeof res);
+	assert.equal("5.83", res);
+
+});
+
+test( "Test filtering based on day", function(assert) {
+	var yrday = new LogIt.Task({date: Date.today().addDays(-1)});
+	var today1 = new LogIt.Task({date: Date.today()});
+	var today2 = new LogIt.Task({date: Date.today()});
+	var tmrww = new LogIt.Task({date: Date.today().addDays(1)});
+	
+	var col = new LogIt.TaskCollection();
 	col.add([yrday, today1, today2, tmrww]);
 	
 	var todayResults = col.day();
@@ -33,12 +55,12 @@ QUnit.test( "Test filtering based on day", function(assert) {
 	assert.equal(tmrww, tomResults[0]);
 
 });
-QUnit.test( "Test match for type ahead", function(assert) {
-	var t1 = new qLog.Task({date: Date.today(), task: 'Task A1'});
-	var t2 = new qLog.Task({date: Date.today(), task: 'Task A2'});
-	var t3 = new qLog.Task({date: Date.today(), task: 'Task A3'});
+test( "Test match for type ahead", function(assert) {
+	var t1 = new LogIt.Task({date: Date.today(), task: 'Task A1'});
+	var t2 = new LogIt.Task({date: Date.today(), task: 'Task A2'});
+	var t3 = new LogIt.Task({date: Date.today(), task: 'Task A3'});
 	
-	var col = new qLog.TaskCollection();
+	var col = new LogIt.TaskCollection();
 	col.add([t1, t2, t3]);
 	
 	var ignoreCaseMatches = col.match('task');

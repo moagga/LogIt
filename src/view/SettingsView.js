@@ -38,7 +38,7 @@ LogIt.SettingsView = Backbone.View.extend({
 		var valid = false;
 		if (h && h !== ''){
 			var v = parseInt(h);
-			return v > 0 && v < 24;
+			return v > 0 && v <= 24;
 		}
 		return valid;
 	}
